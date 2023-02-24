@@ -1,0 +1,28 @@
+{
+  "translation": {
+    "Order Amount": "Bestellbetrag",
+    "View": "Aussicht",
+    "Supplier Name": "Name des Anbieters",
+    "Order Number": "Bestellnummer",
+    "Order Co": "Bestellung Co",
+    "Language": "German",
+    "Forgot your password?": "Passwort vergessen",
+    "Sign Up": "Anmelden",
+    "Email id": "E-Mail-ID",
+    "Profile": "Profil",
+    "Logout": "Ausloggen",
+    "Confirm": "Bestätigen Sie",
+    "Cancel": "Abbrechen",
+    "UPDATE": "AKTUALISIEREN",
+    "Ok": "In Ordnung",
+    "Alert": "Alarm",
+    "Purchase Order": "Kaufen Bestellen",
+    "Pending Order": "Ausstehend Bestellen",
+    "Approved Order": "Genehmigt Bestellen",
+    "Rejected Order": "Abgelehnt Bestellen",
+    "Cancelled Order": "Abgesagt Bestellen",
+    "Sales Order": "Der Umsatz Bestellen",
+    "Manufacturing Order": "Herstellung Bestellen",
+    "Enter valid Username and Password": "Geben Sie einen gültigen Benutzernamen und ein gültiges Passwort ein"
+  }
+}

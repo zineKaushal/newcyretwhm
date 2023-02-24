@@ -1,0 +1,30 @@
+{
+  "translation": {
+    "hello": "नमस्ते",
+    "Language": "हिन्दी",
+    "this line is translated": "यह पंक्ति अनुवादित है",
+    "Order Amount": "आदेश करने की राशि",
+    "View": "राय",
+    "Supplier Name": "आपूर्तिकर्ता का नाम",
+    "Order Number": "क्रम संख्या",
+    "Order Co": "आदेश सह",
+    "Forgot your password?": "क्या आप अपना पासवर्ड भूल गए?",
+    "Sign Up": "साइन अप करें",
+    "Email id": "ईमेल आईडी",
+    "Profile": "प्रोफ़ाइल",
+    "Logout": "लॉग आउट",
+    "Confirm": "पुष्टि करना",
+    "Cancel": "रद्द करें",
+    "UPDATE": "अपडेट करें",
+    "Ok": "ठीक",
+    "Alert": "चेतावनी",
+    "Purchase Order": "खरीद आदेश",
+    "Pending Order": "लंबित आदेश",
+    "Approved Order": "स्वीकृत आदेश",
+    "Rejected Order": "अस्वीकार आदेश",
+    "Cancelled Order": "रद्द आदेश",
+    "Sales Order": "बिक्री आदेश",
+    "Manufacturing Order": "उत्पादन आदेश",
+    "Enter valid Username and Password": "वैध उपयोगकर्ता नाम और पासवर्ड दर्ज करें"
+  }
+}
