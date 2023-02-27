@@ -2,39 +2,32 @@ import * as React from 'react';
 import {
   Text,
   View,
-  // TextInput,
+  TextInput,
   TouchableHighlight,
   Image,
   Alert,
   BackHandler,
   LogBox,
   StyleSheet,
-  Dimensions,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from '../style/styles';
 import {useNavigation} from '@react-navigation/native';
 import ProjectURL from '../constant/constant';
 import {Icon} from 'react-native-elements';
-import OutlineInput from 'react-native-outline-input';
-import {TextInput} from 'react-native-paper';
 
 let backPressed = 0;
 
 LogBox.ignoreLogs(['Warning:  Possible Unhandled Promise Rejection (id: 0)']);
 LogBox.ignoreAllLogs();
-
-const cardWidth = 158;
-
-export class Login extends React.Component {
+export default class Login extends  React.Component {
+  
   constructor(props) {
     super(props);
     this.state = {
-      email: 'cyrnitishm',
-      password: 'pune@123',
+      email: 'cyrnitishm', //#'cyrnitishm',
+      password: 'pune@123', // #'pune@123',
       error: '',
-      isFocusedLogin: false,
-      isFocusedPassword: false,
     };
   }
 
@@ -48,14 +41,6 @@ export class Login extends React.Component {
     );
   };
 
-
-    // this.setState
-//     const [name,setNAMe] = React.useEffect();
-// 
-//     setNAMe('ajinkya')
-
-
-    
   handleBackButton = () => {
     if (this.props.navigation.isFocused()) {
       if (backPressed == 0) {
@@ -94,39 +79,68 @@ export class Login extends React.Component {
       Alert.alert('Password should not be blank');
     } else {
       this.setState({error: null});
-      this.props.navigation.navigate('Home', {
-              screen: 'Home',
-              params: {alphaName: 'Ajinkya Joshi'},
+      fetch(ProjectURL + `/jderest/v2/tokenrequest`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: email,
+          password: password,
+        }),
+      })
+        .then(response => response.json())
+        .then(response => {
+          console.log('defaultApp -> data', response);
+          AsyncStorage.clear();
+          AsyncStorage.setItem('userToken', response.userInfo.token);
+          AsyncStorage.setItem('userName', response.userInfo.alphaName);
+          AsyncStorage.setItem('userEmail', response.username);
+          console.log('tokeeen',response.userInfo.token)
+          fetch(ProjectURL + `/jderest/v2/formservice`, {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+            
+              token: response.userInfo.token,
+              formName: 'P43081_W43081A',
+              outputType: 'GRID_DATA',
+              formServiceAction: 'R',
+              returnControlIDs: '1[22,21,24,183,65,187,173,191]',
+              version: 'ZJDE0002',
+              findOnEntry: 'true',
+            }),
+          })
+            .then(response => response.json())
+            .then(response => {
+              console.log(
+                'response',
+                response,
+              );
+          
+             
+            })
+            .catch(err => {
+              console.log(err);
+            
+              // Alert.alert('Error')
             });
-      // fetch(ProjectURL + `/jderest/v2/tokenrequest`, {
-      //   method: 'POST',
-      //   headers: {
-      //     Accept: 'application/json',
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({
-      //     username: 'cyrnitishm',//email,
-      //     password: 'pune@123'//password,
-      //   }),
-      // })
-      //   .then(response => response.json())
-      //   .then(response => {
-      //     console.log('defaultApp -> data', response);
-      //     AsyncStorage.clear();
-      //     AsyncStorage.setItem('userToken', response.userInfo.token);
-      //     AsyncStorage.setItem('userName', response.userInfo.alphaName);
-      //     AsyncStorage.setItem('userEmail', response.username);
-      //     this.props.navigation.navigate('Home', {
-      //       screen: 'Home',
-      //       params: {alphaName: response.userInfo.alphaName},
-      //     });
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //     Alert.alert('Enter valid Username and Password');
-      //   });
+          this.props.navigation.navigate('Home', {
+            screen: 'Home',
+            params: {alphaName: response.userInfo.alphaName},
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          Alert.alert('Enter valid Username and Password');
+        });
     }
   };
+
   render() {
     return (
       <View style={styles.root}>
@@ -138,51 +152,27 @@ export class Login extends React.Component {
           <Text style={styles.loginText}>Welcome</Text>
           <Text style={styles.loginText1}>Sign in to continue</Text>
         </View>
-        <View style={[styles.item1, {paddingTop: 12}]}>
-        <Text style={styles.loginText2}>Enter User ID & Password</Text>
-          <View style={{width:'100%',paddingLeft:30,paddingRight:30,paddingTop:10}}>
-            <OutlineInput
-              height={80}
-              label="User ID"
-              // fontSize={}
-              activeValueColor="#1d4355"
-              activeBorderColor="#1d4355"
-              activeLabelColor="#1d4355"
-              passiveBorderColor="#b2b2b2"
-              passiveLabelColor="#b2b2b2"
-              passiveValueColor="#1d4355"
-              value={'cyrnitishm'}
+        <View style={[styles.item1, {paddingTop: 30}]}>
+          <Text style={styles.loginText2}>Email</Text>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.inputs}
+              placeholder="User ID"
+              placeholderTextColor="grey"
+              keyboardType="email-address"
+              underlineColorAndroid="transparent"
               onChangeText={email => this.setState({email})}
-              />
-            {/* <TextInput
-            mode='outlined'
-            label='User ID'
-            // style={{color:'green'}}
-            // backgroundColor="black" 
-            activeOutlineColor='red' 
-            outlineColor='green'
-            placeholderTextColor="orange"
-            style={{height:40}}
-            right={<TextInput.Icon name=''/>}
-            placeholder='abc'/> */}
-
+            />
           </View>
 
-          <View style={{width:'100%',paddingLeft:30,paddingRight:30,paddingTop:20,paddingBottom:30}}>
-          <OutlineInput
-              height={40}
-              label="Password"
-              activeValueColor="#1d4355"
-              activeBorderColor="#1d4355"
-              activeLabelColor="#1d4355"
-              passiveBorderColor="#b2b2b2"
-              passiveLabelColor="#b2b2b2"
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.inputs}
+              placeholder="Password"
               secureTextEntry={true}
-              passiveValueColor="#1d4355"
-              value={'pune@123'}
+              underlineColorAndroid="transparent"
               onChangeText={password => this.setState({password})}
-              />
-            
+            />
           </View>
           <View>
             <TouchableHighlight
@@ -204,9 +194,44 @@ export class Login extends React.Component {
         </View>
       </View>
 
-     
-    );
+      // <View style={styles.container}>
+      //   <Image
+      //     style={styles.image}
+      //     source={require('../images/CyretFullLogo.png')}
+      //   />
+      //   <Text style={styles.titleText}>Sign In </Text>
+      //   <View style={styles.inputContainer}>
+      //     <TextInput
+      //       style={styles.inputs}
+      //       placeholder="User ID"
+      //       placeholderTextColor="grey"
+      //       keyboardType="email-address"
+      //       underlineColorAndroid="transparent"
+      //       onChangeText={email => this.setState({email})}
+      //     />
+      //   </View>
+
+      //   <View style={styles.inputContainer}>
+      //     <TextInput
+      //       style={styles.inputs}
+      //       placeholder="Password"
+      //       secureTextEntry={true}
+      //       underlineColorAndroid="transparent"
+      //       onChangeText={password => this.setState({password})}
+      //     />
+      //   </View>
+
+      //   <TouchableHighlight
+      //     style={[styles.buttonContainer, styles.loginButton]}
+      //     onPress={() => this.onClickListener()}>
+      //     <Text style={styles.loginText}>Sign In</Text>
+      //   </TouchableHighlight>
+
+      //   <TouchableHighlight
+      //     onPress={() => this.props.navigation.navigate('ForgotPassword')}>
+      //     <Text style={styles.forgotText}>Forgot your password?</Text>
+      //   </TouchableHighlight>
+      // </View>
+    )
   }
 }
-
-export default Login;

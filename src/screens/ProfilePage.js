@@ -42,8 +42,7 @@ export default class ProfilePage extends React.Component {
               flexDirection: 'row',
               flexWrap: 'wrap',
               justifyContent: 'space-evenly',
-              marginBottom:-20,
-              marginTop:20            }}>
+            }}>
             {/* <Text style={({marginBottom: 15, marginTop: 60, backgroundColor: 'black'}, [styles.text])}> */}
             <Text style={styles.ProfilePagehome_card_hedertext}>
               My Profile
@@ -75,14 +74,14 @@ export default class ProfilePage extends React.Component {
                   styles.ProfilePagename,
                   {fontWeight: 'bold', fontSize: 23},
                 ]}>
-                {this.state.userName ? this.state.userName : ' '}
+                {this.state.userName ? this.state.userName : 'Ajinkya Joshi'}
               </Text>
               <Text style={styles.ProfilePagename}>
                 {this.state.userEmail
                   ? this.state.userEmail
-                  : ''}
+                  : 'ajinkya.joshi@cyret.com'}
               </Text>
-              <Text style={styles.ProfilePagename}> India </Text>
+              <Text style={styles.ProfilePagename}>Florida </Text>
             </View>
             <Image
               style={styles.ProfilePageavatar}
@@ -125,12 +124,12 @@ export default class ProfilePage extends React.Component {
               <Image
                 style={styles.ProfilePageicon}
                 source={{
-                  uri: 'https://img.icons8.com/color/70/000000/facebook-like.png',
+                  uri: 'https://img.icons8.com/color/70/000000/filled-like.png',
                 }}
               />
             </View>
             <View style={styles.ProfilePageinfoContent}>
-              <Text style={styles.ProfilePageinfo}>Placeholder1</Text>
+              <Text style={styles.ProfilePageinfo}>News</Text>
             </View>
           </View>
 
@@ -139,12 +138,12 @@ export default class ProfilePage extends React.Component {
               <Image
                 style={styles.ProfilePageicon}
                 source={{
-                  uri: 'https://img.icons8.com/color/48/000000/analytics.png',
+                  uri: 'https://img.icons8.com/color/70/000000/facebook-like.png',
                 }}
               />
             </View>
             <View style={styles.ProfilePageinfoContent}>
-              <Text style={styles.ProfilePageinfo}>Placeholder2</Text>
+              <Text style={styles.ProfilePageinfo}>Shop</Text>
             </View>
           </View>
           <TouchableOpacity

@@ -114,17 +114,6 @@ export default StyleSheet.create({
     backgroundColor: '#fff',
     
   },
-  model_buttonContainer: {
-    height: 35,
-    justifyContent: 'center',
-    // alignSelf: 'left',
-    bottom: 0,
-    width: '30%',
-    borderRadius: 8,
-    backgroundColor: '#fff',
-    margin:10
-    
-  },
 
   loginText: {
     paddingTop: 20,
@@ -377,24 +366,6 @@ export default StyleSheet.create({
     backgroundColor: '#0F2A37',
     marginBottom: 10,
   },
-  model_card: {
-    margin: 15,
-    width: 300,
-    height: 200,
-    backgroundColor: '#0f2a37',
-    borderRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 10,
-    shadowColor: '#52006A',
-  },
-  model_card_heder: {
-    height: 90,
-    // width: 160,
-    justifyContent: 'center',
-    backgroundColor: '#0F2A37',
-    marginBottom: 10,
-  },
   Profilehome_card_heder: {
     height: '34%',
     // width: 160
@@ -528,11 +499,6 @@ export default StyleSheet.create({
     width: 1,
     backgroundColor: '#365b6d',
   },
-  verticleLine_white: {
-    height: '100%',
-    width: 1,
-    backgroundColor: '#ffff',
-  },
   transfer_card: {
     
     backgroundColor: '#ffff',
@@ -546,10 +512,4 @@ export default StyleSheet.create({
     shadowOffset: {width: -2, height: 4},
     shadowOpacity: 0.2
   },
-  vl:{
-    borderLeftWidth: 6,
-     
-    height: 500,
-  },
-  
 });

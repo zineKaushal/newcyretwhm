@@ -9,7 +9,7 @@ export default class SplashScreen extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(() => this.props.navigation.navigate('AuthLoading'), 3500);
+    setTimeout(() => this.props.navigation.navigate('AuthLoading'), 2000);
   }
   render() {
     return (
@@ -17,7 +17,7 @@ export default class SplashScreen extends React.Component {
         <Image
           style={styles.imagegif}
           resizeMode="contain"
-          source={require('../LoadingScreen/LodingAnimation.gif')}
+          source={require('../images/CyretJDE.gif')}
         />
       </View>
     );

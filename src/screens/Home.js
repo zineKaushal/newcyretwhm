@@ -15,7 +15,7 @@ import styles from '../style/styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {CurvedBottomBar} from 'react-native-curved-bottom-bar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import FlatListBasics from '../screens/PO_approval_list_view';
+// import FlatListBasics from '../screens/PO_approval_list_view';
 import Location_Transfer from './Location_Transfer';
 // import Setting from '../screens/Setting';
 
@@ -32,7 +32,7 @@ LogBox.ignoreLogs([
   'Warning:  Each child in a list should have a unique "key" prop. ',
 ]); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
-export class HomeScreen extends React.Component {
+export class Homescreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,6 +40,7 @@ export class HomeScreen extends React.Component {
       type: 'down',
       routeName: '',
       selectTab: '',
+      
     };
   }
 
@@ -54,6 +55,8 @@ export class HomeScreen extends React.Component {
   fetchInfo = async () => {
     let user = await AsyncStorage.getItem('userName');
     console.log('user', user);
+    console.log('this.state.type',this.state.type)
+
     this.setState({userName: user});
   };
 
@@ -65,7 +68,7 @@ export class HomeScreen extends React.Component {
     }
   };
 
-  _renderIcon = (routeName: string, selectTab: string) => {
+  _renderIcon = (routeName, selectTab) => {
     let icon = '';
 
     switch (routeName) {
@@ -92,7 +95,7 @@ export class HomeScreen extends React.Component {
     );
   };
 
-  renderTabBar = ({routeName, selectedTab, navigate}: any) => {
+  renderTabBar = ({routeName, selectedTab, navigate}) => {
     return (
       <TouchableOpacity
         onPress={() => navigate(routeName)}
@@ -106,15 +109,16 @@ export class HomeScreen extends React.Component {
     );
   };
 
-  onClickButton = () => {
-    if (this.state.type === 'up') {
-      this.setState({type: 'down'});
-      this.RBSheet.close();
-    } else {
-      this.setState({type: 'up'});
-      this.RBSheet.open();
-    }
-  };
+  // onClickButton = ()=>{
+  //   console.log('called',this.state.type)
+  //   if (this.state.type === 'up') {
+  //     this.setState({type: 'down'});
+  //     this.RBSheet.close();
+  //   } else {
+  //     this.setState({type: 'up'});
+  //     this.RBSheet.open();
+  //   }
+  // };
 
   render() {
     if (this.props.route.params) {
@@ -149,12 +153,13 @@ export class HomeScreen extends React.Component {
                   ? styles.btnCircle
                   : styles.btnCircleUp,
               ]}
-              onPress={this.onClickButton}>
-              <Image
+              // onPress={this.onClickButton()}
+              >
+              {/* <Image
                 source={require('../images/cyret_img.png')}
                 resizeMode="contain"
                 style={{width: 50, height: 50, backgroundColor: 'transparent',alignSelf:'center',alignItems: 'center'}}
-              />
+              /> */}
             </TouchableOpacity>
           )}
           tabBar={this.renderTabBar}>
@@ -174,7 +179,7 @@ export class HomeScreen extends React.Component {
             name="Location_Transfer"
             component={() => (
               <View style={{flex: 1, backgroundColor: '#204A6C'}}>
-                {/* <Location_Transfer /> */}
+                <Location_Transfer />
               </View>
             )}
             position="left"
@@ -247,11 +252,11 @@ export class HomeScreen extends React.Component {
                   </View>
                   <View style={styles.rbsheetCardViewBg}>
                     <TouchableOpacity onPress={() => {}}>
-                      <Image
-                        source={require('../images/MenuIcons/SingleItemtransfer.png')}
+                      {/* <Image
+                        source={require('../../src/images/MenuIcons/SingleItemTransfer.png')}
                         resizeMode="contain"
                         style={styles.rbsheetImage}
-                      />
+                      /> */}
                       <Text style={[styles.rbsheetText]}>
                       Single Item transfer
                       </Text>
@@ -259,10 +264,10 @@ export class HomeScreen extends React.Component {
                   </View>
                   <View style={styles.rbsheetCardViewBg}>
                     <TouchableOpacity onPress={() => {}}>
-                      <Image
+                      {/* <Image
                         source={require('../images/MenuIcons/MultipleItemtransfer.png')}
                         style={styles.rbsheetImage}
-                      />
+                      /> */}
                       <Text style={styles.rbsheetText}>Multiple Item transfer</Text>
                     </TouchableOpacity>
                   </View>
@@ -276,10 +281,10 @@ export class HomeScreen extends React.Component {
                   }}>
                   <View style={styles.rbsheetCardViewBg}>
                     <TouchableOpacity onPress={() => {}}>
-                      <Image
+                      {/* <Image
                         source={require('../images/MenuIcons/CycleCount.png')}
                         style={styles.rbsheetImage}
-                      />
+                      /> */}
                       <Text style={[styles.rbsheetText]}>
                       Cycle Count
                       </Text>
@@ -287,10 +292,10 @@ export class HomeScreen extends React.Component {
                   </View>
                   <View style={styles.rbsheetCardViewBg}>
                     <TouchableOpacity onPress={() => {}}>
-                      <Image
-                        source={require('../images/MenuIcons/Replenishment.png')}
+                      {/* <Image
+                        source={'../images/MenuIcons/Replenishment.png'}
                         style={styles.rbsheetImage}
-                      />
+                      /> */}
                       <Text style={styles.rbsheetText}>
                       Replenishment
                       </Text>
@@ -298,10 +303,10 @@ export class HomeScreen extends React.Component {
                   </View>
                   <View style={styles.rbsheetCardViewBg}>
                     <TouchableOpacity onPress={() => {}}>
-                      <Image
-                        source={require('../images/MenuIcons/LocationEnquiry.png')}
+                      {/* <Image
+                        source={'../images/MenuIcons/LocationEnquiry.png'}
                         style={styles.rbsheetImage}
-                      />
+                      /> */}
                       <Text style={[styles.rbsheetText]}>
                       Location Inquiry
                       </Text>
@@ -325,10 +330,10 @@ export class HomeScreen extends React.Component {
                     <TouchableOpacity
                       onPress={() => {}}
                       style={{borderColor: 'red'}}>
-                      <Image
-                        source={require('../images/MenuIcons/POreceipt.png')}
+                      {/* <Image
+                        source={'../images/MenuIcons/POreceipt.png'}
                         style={styles.rbsheetImage}
-                      />
+                      /> */}
                       <Text style={styles.rbsheetText}>
                       PO receipt
                       </Text>
@@ -336,10 +341,10 @@ export class HomeScreen extends React.Component {
                   </View>
                   <View style={[styles.rbsheetCardViewBg,{marginLeft:20}]}>
                     <TouchableOpacity onPress={() => {}}>
-                      <Image
-                        source={require('../images/MenuIcons/PutAwayConfirmation.png')}
+                      {/* <Image
+                        source={'../images/MenuIcons/PutAwayConfirmation.png'}
                         style={styles.rbsheetImage}
-                      />
+                      /> */}
                       <Text style={[styles.rbsheetText]}>
                       Put away confirmation
                       </Text>
@@ -363,10 +368,10 @@ export class HomeScreen extends React.Component {
                     <TouchableOpacity
                       onPress={() => {}}
                       style={{borderColor: 'red'}}>
-                      <Image
-                        source={require('../images/MenuIcons/ShippingConfirmation.png')}
+                      {/* <Image
+                        source={'../images/MenuIcons/ShippingConfirmation.png'}
                         style={styles.rbsheetImage}
-                      />
+                      /> */}
                       <Text style={styles.rbsheetText}>
                       Shipping Confirmation
                       </Text>
@@ -374,10 +379,10 @@ export class HomeScreen extends React.Component {
                   </View>
                   <View style={styles.rbsheetCardViewBg}>
                     <TouchableOpacity onPress={() => {}}>
-                      <Image
-                        source={require('../images/MenuIcons/PickConfirmation.png')}
+                      {/* <Image
+                        source={'../images/MenuIcons/PickConfirmation.png'}
                         style={styles.rbsheetImage}
-                      />
+                      /> */}
                       <Text style={[styles.rbsheetText]}>
                       Pick Confirmation
                       </Text>
@@ -385,10 +390,10 @@ export class HomeScreen extends React.Component {
                   </View>
                   <View style={styles.rbsheetCardViewBg}>
                     <TouchableOpacity onPress={() => {}}>
-                      <Image
-                        source={require('../images/MenuIcons/BuildCarton.png')}
+                      {/* <Image
+                        source={'../images/MenuIcons/BuildCarton.png'}
                         style={styles.rbsheetImage}
-                      />
+                      /> */}
                       <Text style={[styles.rbsheetText]}>
                       Build Carton
                       </Text>
@@ -404,10 +409,10 @@ export class HomeScreen extends React.Component {
                   }}>
                   <View style={[styles.rbsheetCardViewBg,{marginLeft:20}]}>
                     <TouchableOpacity onPress={() => {}}>
-                      <Image
-                        source={require('../images/MenuIcons/BuildPallet.png')}
+                      {/* <Image
+                        source={'../images/MenuIcons/BuildPallet.png'}
                         style={styles.rbsheetImage}
-                      />
+                      /> */}
                       <Text style={[styles.rbsheetText]}>
                       Build Pallet
                       </Text>
@@ -415,10 +420,10 @@ export class HomeScreen extends React.Component {
                   </View>
                   <View style={[styles.rbsheetCardViewBg,{marginLeft:20}]}>
                     <TouchableOpacity onPress={() => {}}>
-                      <Image
-                        source={require('../images/MenuIcons/Palletization.png')}
+                      {/* <Image
+                        source={'../images/MenuIcons/Palletization.png'}
                         style={styles.rbsheetImage}
-                      />
+                      /> */}
                       <Text style={styles.rbsheetText}>
                       Palletization
                       </Text>
@@ -441,27 +446,27 @@ export class HomeScreen extends React.Component {
                     <TouchableOpacity
                       onPress={() => {}}
                       style={{borderColor: 'red'}}>
-                      <Image
-                        source={require('../images/MenuIcons/Materialissue.png')}
+                      {/* <Image
+                        source={'../images/MenuIcons/Materialissue.png'}
                         style={styles.rbsheetImage}
-                      />
+                      /> */}
                       <Text style={styles.rbsheetText}>
                       Material issue
 
                       </Text>
                     </TouchableOpacity>
                   </View>
-                  <View style={[styles.rbsheetCardViewBg,{marginLeft:20}]}>
-                    <TouchableOpacity onPress={() => {}}>
-                      <Image
+                  {/* <View style={[styles.rbsheetCardViewBg,{marginLeft:20}]}>
+                    <TouchableOpacity >
+                       <Image
                         source={require('../images/MenuIcons/Manufacturingcompletion.png')}
                         style={styles.rbsheetImage}
-                      />
+                      /> 
                       <Text style={[styles.rbsheetText]}>
                       Manufacturing completion
                       </Text>
                     </TouchableOpacity>
-                  </View>
+                  </View> */}
                   
                   
                   
@@ -500,7 +505,8 @@ export class HomeScreen extends React.Component {
                       ? styles.btnCircle
                       : styles.btnCircleUp,
                   ]}
-                  onPress={this.onClickButton}>
+                  // onPress={this.onClickButton}
+                  >
                   <Image
                     source={require('../images/cross.png')}
                     resizeMode="contain"
@@ -544,4 +550,4 @@ export class HomeScreen extends React.Component {
   }
 }
 
-export default HomeScreen;
+export default Homescreen;
